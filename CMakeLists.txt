@@ -25,7 +25,7 @@ endif()
 
 option(BUILD_TESTING "Build the testing tree." ON)
 option(IRIS_WITH_EIGEN
-  "C++ matrix library. Only disable if you have this already." ON)
+  "C++ matrix library. Only disable if you have this already." OFF)
 option(IRIS_WITH_MOSEK
   "Convex optimization solver; free for academics. Only disable if you have this already."
   ON)
@@ -82,9 +82,7 @@ if(IRIS_WITH_CDD)
 
   ExternalProject_Add(cdd
     DOWNLOAD_DIR "${CMAKE_CURRENT_BINARY_DIR}/cdd-download"
-    URL https://d2tbce6hkathzp.cloudfront.net/other/cddlib/cddlib-094h.tar.gz
-    URL_HASH SHA256=fe6d04d494683cd451be5f6fe785e147f24e8ce3ef7387f048e739ceb4565ab5
-    TLS_VERIFY 1
+    URL https://github.com/cddlib/cddlib/archive/refs/tags/0.94h.tar.gz
     SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/cdd-src"
     PATCH_COMMAND "${PATCH_EXECUTABLE}" -p1 < "${CMAKE_CURRENT_SOURCE_DIR}/cdd.patch"
     CONFIGURE_COMMAND ${AUTOTOOLS_ENV} "<SOURCE_DIR>/configure" "--prefix=${CMAKE_INSTALL_PREFIX}"
